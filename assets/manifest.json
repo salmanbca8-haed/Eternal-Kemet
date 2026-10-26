@@ -1,0 +1,111 @@
+{
+  "title": "Egypt: The Land of Eternal Wonder",
+  "totalGizaFrames": 600,
+  "totalConstructionFrames": 192,
+  "gizaFramePath": "assets/frames/giza/frame_{index}.jpg",
+  "constructionFramePath": "assets/frames/construction/construction_{index}.jpg",
+  "audio": {
+    "path": "assets/audio/egypt_ambient.mp3",
+    "title": "Ancient Egypt Atmosphere"
+  },
+  "video": {
+    "path": "assets/video/Building_the_Great_Pyramid_of_20261026164155.mp4",
+    "title": "Building the Great Pyramid of Giza"
+  },
+  "images": {
+    "templeDendera": "assets/images/0c012c790161efe92b2af750530d4527.jpg",
+    "tombSanctuary": "assets/images/f6c47d05680dc898be8042e3cd65ad6b.jpg"
+  },
+  "scenes": [
+    {
+      "id": "scene-01",
+      "number": "01",
+      "title": "The Land of Eternity",
+      "headline": "EGYPT \u2014 A CIVILIZATION THAT LIVES FOREVER",
+      "subheadline": "Where golden sands preserve the memories of a world that changed human history.",
+      "frameSequence": "giza",
+      "frameStart": 1,
+      "frameEnd": 155,
+      "description": "Expansive drone flyover across the Giza plateau and pyramids bathed in eternal sunrise light."
+    },
+    {
+      "id": "scene-02",
+      "number": "02",
+      "title": "The Nile, Source of Life",
+      "headline": "BORN FROM THE NILE",
+      "subheadline": "Along the river that nourished the land, communities flourished, knowledge grew, and one of history\u2019s great civilizations emerged.",
+      "frameSequence": "construction",
+      "frameStart": 1,
+      "frameEnd": 65,
+      "description": "The life-giving waters of the Nile, ancient agricultural villages, and bustling harbors along the fertile valley."
+    },
+    {
+      "id": "scene-03",
+      "number": "03",
+      "title": "The Great Pyramid",
+      "headline": "A VISION CARVED IN STONE",
+      "subheadline": "Colossal monumental ramps, engineering genius, and the transport of multi-ton limestone blocks rising into the desert sky.",
+      "frameSequence": "construction",
+      "frameStart": 66,
+      "frameEnd": 140,
+      "description": "Witnessing the awe-inspiring engineering behind Khufu\u2019s monument\u2014the only surviving wonder of the ancient world."
+    },
+    {
+      "id": "scene-04",
+      "number": "04",
+      "title": "The People Behind the Monument",
+      "headline": "THE HANDS THAT SHAPED HISTORY",
+      "subheadline": "Architects, master stonecutters, surveyed teams, and dedicated communities whose collective determination built eternity.",
+      "frameSequence": "construction",
+      "frameStart": 141,
+      "frameEnd": 192,
+      "description": "Honoring the human world of ancient Egyptian builders, their thriving settlement camps, bakeries, and craftsmanship."
+    },
+    {
+      "id": "scene-05",
+      "number": "05",
+      "title": "A World of Knowledge and Art",
+      "headline": "WHERE ART BECAME ETERNITY",
+      "subheadline": "Hieroglyphs of sacred wisdom, astronomical ceilings mapping the cosmos, and artistic traditions preserved across millennia.",
+      "frameSequence": "giza",
+      "frameStart": 401,
+      "frameEnd": 484,
+      "image": "assets/images/0c012c790161efe92b2af750530d4527.jpg",
+      "description": "Intricate relief carvings, mathematical precision, and the celestial alignments of Egyptian architects."
+    },
+    {
+      "id": "scene-06",
+      "number": "06",
+      "title": "Temples, Kings, and the Sacred World",
+      "headline": "MONUMENTS TO THE DIVINE",
+      "subheadline": "Towering hypostyle columns, colossal pharaonic statues, and sacred sanctuaries where mortals touched the realm of the gods.",
+      "frameSequence": "giza",
+      "frameStart": 156,
+      "frameEnd": 245,
+      "image": "assets/images/f6c47d05680dc898be8042e3cd65ad6b.jpg",
+      "description": "Walking between the massive pillars of ancient Egyptian temples, lit by warm flickering lamplight."
+    },
+    {
+      "id": "scene-07",
+      "number": "07",
+      "title": "The Beauty of Egypt Today",
+      "headline": "AN ANCIENT SOUL. A LIVING WORLD.",
+      "subheadline": "A timeless civilization carrying forward its heritage\u2014from the sands of Giza to the living cities and eternal waters of modern Egypt.",
+      "frameSequence": "giza",
+      "frameStart": 246,
+      "frameEnd": 315,
+      "description": "The Great Sphinx gazing across golden blowing sands, bridging the dawn of human history with the modern world."
+    },
+    {
+      "id": "scene-08",
+      "number": "08",
+      "title": "The Eternal Legacy",
+      "headline": "SOME WONDERS ARE NEVER FORGOTTEN.",
+      "subheadline": "Explore Egypt. Discover humanity\u2019s past. See the world differently.",
+      "frameSequence": "giza",
+      "frameStart": 485,
+      "frameEnd": 600,
+      "description": "Soaring over the untouched golden desert dunes into the face of the Sphinx in a cinematic farewell."
+    }
+  ]
+}

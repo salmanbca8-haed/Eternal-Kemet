@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>EGYPT: The Land of Eternal Wonder — Cinematic Scrollytelling Experience</title>
+  <meta name="description" content="A breathtaking cinematic journey through Ancient Egypt. Experience the Giza plateau, the Nile, the construction of the Great Pyramid, and sacred temples through scroll-driven frame animation.">
+  <meta name="keywords" content="Ancient Egypt, Great Pyramid of Giza, Sphinx, Nile River, Pharaohs, Scrollytelling, Egyptian History, Dendera, Karnak">
+  <meta name="theme-color" content="#15120E">
+  
+  <!-- Open Graph / Social Sharing -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="EGYPT: The Land of Eternal Wonder">
+  <meta property="og:description" content="Explore Ancient Egypt through a cinematic scrolling odyssey across the pyramids, temples, and the Nile.">
+  <meta property="og:image" content="assets/frames/giza/frame_0001.jpg">
+
+  <!-- Typography: Cinzel Decorative, Cormorant Garamond, and Outfit -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700;900&family=Cinzel:wght@400;600;700;800&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body class="is-loading">
+
+  <!-- Atmospheric Background Audio -->
+  <audio id="ambient-audio" preload="auto" loop>
+    <source src="assets/audio/egypt_ambient.mp3" type="audio/mp3">
+  </audio>
+
+  <!-- Initial Preloader & Grand Entrance Modal -->
+  <div id="experience-intro" class="intro-screen">
+    <div class="intro-backdrop"></div>
+    <div class="intro-content">
+      <div class="intro-emblem" aria-hidden="true">
+        <svg viewBox="0 0 100 100" class="winged-scarab-svg" width="72" height="72">
+          <circle cx="50" cy="50" r="46" fill="none" stroke="currentColor" stroke-width="1.2" stroke-dasharray="4 2"/>
+          <path d="M50 18 L53 38 L65 42 L50 78 L35 42 L47 38 Z" fill="currentColor" opacity="0.9"/>
+          <circle cx="50" cy="22" r="7" fill="none" stroke="currentColor" stroke-width="1.5"/>
+          <path d="M22 45 C30 30, 42 28, 50 28 C58 28, 70 30, 78 45" fill="none" stroke="currentColor" stroke-width="1.5"/>
+          <path d="M14 55 C26 40, 40 38, 50 38 C60 38, 74 40, 86 55" fill="none" stroke="currentColor" stroke-width="1"/>
+        </svg>
+      </div>
+      <p class="intro-pretitle">AN IMMERSIVE HISTORICAL ODYSSEY</p>
+      <h1 class="intro-title">EGYPT</h1>
+      <p class="intro-subtitle">THE LAND OF ETERNAL WONDER</p>
+      
+      <div class="intro-loader-box">
+        <div class="intro-progress-bar">
+          <div id="intro-progress-fill" class="intro-progress-fill"></div>
+        </div>
+        <p id="intro-status-text" class="intro-status-text">Summoning the Sands of Time (0%)</p>
+      </div>
+
+      <div class="intro-action-box">
+        <button id="btn-enter" class="btn-royal" disabled>
+          <span class="btn-border-corner tl"></span>
+          <span class="btn-border-corner tr"></span>
+          <span class="btn-border-corner bl"></span>
+          <span class="btn-border-corner br"></span>
+          <span class="btn-text">ENTER EGYPT WITH SOUND</span>
+          <span class="btn-icon">𓊹</span>
+        </button>
+        <button id="btn-enter-muted" class="btn-ghost" disabled>
+          Explore Muted
+        </button>
+      </div>
+      <p class="intro-hint">Scroll down to traverse 4,500 years of civilization</p>
+    </div>
+  </div>
+
+  <!-- Main Sticky Visual Experience Container -->
+  <div id="cinema-viewport" class="cinema-viewport" aria-hidden="true">
+    <!-- Primary Scrollytelling Canvas -->
+    <canvas id="scroll-canvas" class="scroll-canvas"></canvas>
+    
+    <!-- Atmospheric Particle & Light Beam Canvas Overlay -->
+    <canvas id="dust-canvas" class="dust-canvas"></canvas>
+
+    <!-- Cinematic Vignette & Color Grading Gradients -->
+    <div class="cinema-lighting-overlay"></div>
+    <div class="cinema-scanlines"></div>
+  </div>
+
+  <!-- Sticky Top Navigation & Audio Control Bar -->
+  <header class="experience-header">
+    <div class="header-brand">
+      <span class="hieroglyph-mark" aria-hidden="true">𓇳</span>
+      <div class="brand-text">
+        <span class="brand-title">EGYPT</span>
+        <span class="brand-sub">ETERNAL WONDER</span>
+      </div>
+    </div>
+
+    <!-- Active Chapter Indicator Pill -->
+    <div class="current-chapter-pill" id="current-chapter-pill">
+      <span class="chapter-number-pill" id="chapter-number-pill">SCENE 01</span>
+      <span class="chapter-name-pill" id="chapter-name-pill">The Land of Eternity</span>
+    </div>
+
+    <!-- Right Controls: Audio + Nav Drawer + View Video -->
+    <div class="header-controls">
+      <button id="btn-construction-modal" class="btn-pill-action" title="Watch Great Pyramid Construction Video">
+        <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
+          <polygon points="5 3 19 12 5 21 5 3"/>
+        </svg>
+        <span class="pill-label">Pyramid Film</span>
+      </button>
+
+      <button id="btn-sound-toggle" class="btn-sound-toggle" aria-label="Toggle Sound" title="Sound Control">
+        <div class="sound-waves" id="sound-waves">
+          <span class="wave-bar"></span>
+          <span class="wave-bar"></span>
+          <span class="wave-bar"></span>
+          <span class="wave-bar"></span>
+        </div>
+        <span id="sound-label" class="sound-label">Audio On</span>
+      </button>
+
+      <button id="btn-menu-toggle" class="btn-menu-toggle" aria-label="Open Chapter Menu">
+        <span class="menu-line"></span>
+        <span class="menu-line"></span>
+      </button>
+    </div>
+  </header>
+
+  <!-- Side Timeline & Progress Rail -->
+  <aside class="timeline-rail" aria-label="Journey Timeline">
+    <div class="timeline-track">
+      <div class="timeline-fill" id="timeline-fill"></div>
+      <div class="timeline-marker" id="timeline-marker"></div>
+    </div>
+    <nav class="timeline-nodes" id="timeline-nodes">
+      <!-- Generated via JS for all 8 scenes -->
+    </nav>
+  </aside>
+
+  <!-- Slide-out Chapter Navigation Drawer -->
+  <div id="nav-drawer" class="nav-drawer" aria-hidden="true">
+    <div class="drawer-backdrop" id="drawer-backdrop"></div>
+    <div class="drawer-panel">
+      <div class="drawer-header">
+        <div class="drawer-title-group">
+          <span class="drawer-pretitle">EXPEDITION CHRONICLE</span>
+          <h2 class="drawer-title">THE EIGHT VISTAS</h2>
+        </div>
+        <button id="btn-drawer-close" class="btn-drawer-close" aria-label="Close Menu">✕</button>
+      </div>
+
+      <ul class="drawer-menu-list" id="drawer-menu-list">
+        <!-- Rendered dynamically -->
+      </ul>
+
+      <div class="drawer-footer">
+        <p class="drawer-quote">“To speak the name of the dead is to make them live again.”</p>
+        <span class="drawer-quote-source">— Ancient Egyptian Tomb Inscription</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scrollytelling Track: 8 Narrative Story Scenes -->
+  <main id="scrolly-container" class="scrolly-container">
+
+    <!-- ==============================================
+         SCENE 01: THE LAND OF ETERNITY
+         ============================================== -->
+    <section class="story-scene" id="scene-01" data-scene="0" data-frame-start="1" data-frame-end="155">
+      <div class="scene-content scene-hero-center">
+        <div class="scene-badge">
+          <span class="badge-line"></span>
+          <span class="badge-text">SCENE 01 • GIZA AT DAWN</span>
+          <span class="badge-line"></span>
+        </div>
+        <h2 class="scene-title monumental">EGYPT — A CIVILIZATION THAT LIVES FOREVER</h2>
+        <p class="scene-lead">
+          Where golden sands preserve the memories of a world that changed human history.
+        </p>
+        <div class="hero-scroll-prompt">
+          <div class="scroll-mouse-wheel">
+            <span class="mouse-dot"></span>
+          </div>
+          <span class="scroll-invitation">BEGIN THE JOURNEY ↓</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==============================================
+         SCENE 02: THE NILE, SOURCE OF LIFE
+         ============================================== -->
+    <section class="story-scene" id="scene-02" data-scene="1" data-frame-start="156" data-frame-end="230">
+      <div class="scene-content scene-card-left">
+        <div class="scene-badge">
+          <span class="badge-line"></span>
+          <span class="badge-text">SCENE 02 • THE SACRED RIVER</span>
+          <span class="badge-line"></span>
+        </div>
+        <h2 class="scene-title">BORN FROM THE NILE</h2>
+        <p class="scene-body">
+          Along the river that nourished the land, communities flourished, knowledge grew, and one of history’s great civilizations emerged. The annual inundation (*akhet*) deposited fertile black silt, transforming an arid desert valley into the breadbasket of the ancient Mediterranean.
+        </p>
+        <div class="scene-meta-grid">
+          <div class="meta-item">
+            <span class="meta-val">6,650 km</span>
+            <span class="meta-label">Length of the Nile</span>
+          </div>
+          <div class="meta-item">
+            <span class="meta-val">Kemet</span>
+            <span class="meta-label">"The Black Land" (Fertile Silt)</span>
+          </div>
+          <div class="meta-item">
+            <span class="meta-val">Hapi</span>
+            <span class="meta-label">God of the Inundation</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==============================================
+         SCENE 03: THE GREAT PYRAMID
+         ============================================== -->
+    <section class="story-scene" id="scene-03" data-scene="2" data-frame-start="231" data-frame-end="315">
+      <div class="scene-content scene-card-right">
+        <div class="scene-badge">
+          <span class="badge-line"></span>
+          <span class="badge-text">SCENE 03 • MONUMENTAL ARCHITECTURE</span>
+          <span class="badge-line"></span>
+        </div>
+        <h2 class="scene-title">A VISION CARVED IN STONE</h2>
+        <p class="scene-body">
+          Rising 146 meters above the Giza Plateau, the Great Pyramid commissioned by Pharaoh Khufu (*c. 2560 BCE*) was the tallest man-made structure on Earth for over 3,800 years. Transported over land and water, each multi-ton limestone block was placed with sub-millimeter precision, aligned to true North within 3/60ths of a single degree.
+        </p>
+        <div class="scene-interactive-card">
+          <div class="card-icon">𓉴</div>
+          <div class="card-text">
+            <strong>Witness the Construction Footage</strong>
+            <p>Inspect the supplied aerial sequence of spiral ramps, stonecutters, and the monumental harbors.</p>
+          </div>
+          <button class="btn-card-action" id="btn-trigger-film-modal">Open Film Player</button>
+        </div>
+        <div class="scene-meta-grid">
+          <div class="meta-item">
+            <span class="meta-val">2.3M</span>
+            <span class="meta-label">Limestone Blocks</span>
+          </div>
+          <div class="meta-item">
+            <span class="meta-val">5.75M</span>
+            <span class="meta-label">Tons of Total Mass</span>
+          </div>
+          <div class="meta-item">
+            <span class="meta-val">0.05°</span>
+            <span class="meta-label">True North Alignment</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==============================================
+         SCENE 04: THE PEOPLE BEHIND THE MONUMENT
+         ============================================== -->
+    <section class="story-scene" id="scene-04" data-scene="3" data-frame-start="316" data-frame-end="380">
+      <div class="scene-content scene-card-left">
+        <div class="scene-badge">
+          <span class="badge-line"></span>
+          <span class="badge-text">SCENE 04 • THE BUILDERS</span>
+          <span class="badge-line"></span>
+        </div>
+        <h2 class="scene-title">THE HANDS THAT SHAPED HISTORY</h2>
+        <p class="scene-body">
+          Archaeological excavations at <em>Heit el-Ghurab</em> (the Workers’ Village) have shattered the myth that the pyramids were built by enslaved multitudes. The monuments were erected by respected Egyptian craftspeople, surveyors, master masons, and seasonal labor cohorts who received rations of bread, beef, beer, and professional medical care.
+        </p>
+        <blockquote class="ancient-quote">
+          “The builders were honored in stone, buried in tombs overlooking the monument they raised with their own sinew and mind.”
+        </blockquote>
+      </div>
+    </section>
+
+    <!-- ==============================================
+         SCENE 05: A WORLD OF KNOWLEDGE AND ART
+         ============================================== -->
+    <section class="story-scene" id="scene-05" data-scene="4" data-frame-start="381" data-frame-end="450">
+      <div class="scene-content scene-card-right">
+        <div class="scene-badge">
+          <span class="badge-line"></span>
+          <span class="badge-text">SCENE 05 • SACRED WISDOM</span>
+          <span class="badge-line"></span>
+        </div>
+        <h2 class="scene-title">WHERE ART BECAME ETERNITY</h2>
+        <p class="scene-body">
+          Ancient Egyptian art was not merely aesthetic—it was functional magic (*heka*). On temple walls and royal ceilings, astronomical charts mapped constellations, while hieroglyphs (*medu netjer*, "words of the gods") fixed the universe into enduring balance (*ma'at*).
+        </p>
+        <!-- Interactive Image Feature: Dendera Temple Column Hall -->
+        <div class="featured-media-box" id="inspect-dendera-card">
+          <div class="media-thumb-wrap">
+            <img src="assets/images/0c012c790161efe92b2af750530d4527.jpg" alt="Hypostyle Hall of Dendera Temple with Hathor Columns" loading="lazy">
+            <span class="media-zoom-badge">🔍 Zoom Photo</span>
+          </div>
+          <div class="media-thumb-desc">
+            <strong>Dendera Temple • Hathor Hypostyle Hall</strong>
+            <p>Astronomical ceiling preserved with original vibrant pigments and four-faced Hathoric capitals.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==============================================
+         SCENE 06: TEMPLES, KINGS, AND THE SACRED WORLD
+         ============================================== -->
+    <section class="story-scene" id="scene-06" data-scene="5" data-frame-start="451" data-frame-end="510">
+      <div class="scene-content scene-card-left">
+        <div class="scene-badge">
+          <span class="badge-line"></span>
+          <span class="badge-text">SCENE 06 • SANCTUARIES</span>
+          <span class="badge-line"></span>
+        </div>
+        <h2 class="scene-title">MONUMENTS TO THE DIVINE</h2>
+        <p class="scene-body">
+          Egyptian temples were models of the cosmos at the moment of creation. Walking through a temple was a journey from the profane outside world into the dim, intimate Holy of Holies, where the deity dwelled in serene eternal majesty.
+        </p>
+        <!-- Interactive Image Feature: Tomb Sarcophagus Sanctuary -->
+        <div class="featured-media-box" id="inspect-tomb-card">
+          <div class="media-thumb-wrap">
+            <img src="assets/images/f6c47d05680dc898be8042e3cd65ad6b.jpg" alt="Tomb Sanctuary with Sarcophagus and Deity Statue" loading="lazy">
+            <span class="media-zoom-badge">🔍 Zoom Photo</span>
+          </div>
+          <div class="media-thumb-desc">
+            <strong>The Royal Crypt • Sarcophagus Chamber</strong>
+            <p>Carved limestone door jambs and subterranean burial vault illuminated by ancient lamplight.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==============================================
+         SCENE 07: THE BEAUTY OF EGYPT TODAY
+         ============================================== -->
+    <section class="story-scene" id="scene-07" data-scene="6" data-frame-start="511" data-frame-end="560">
+      <div class="scene-content scene-card-center">
+        <div class="scene-badge">
+          <span class="badge-line"></span>
+          <span class="badge-text">SCENE 07 • LIVING LEGACY</span>
+          <span class="badge-line"></span>
+        </div>
+        <h2 class="scene-title monumental">AN ANCIENT SOUL. A LIVING WORLD.</h2>
+        <p class="scene-lead">
+          Egypt is more than its monumental stones: it is a living civilization with a continuous cultural heartbeat. From the bustling streets of Cairo along the Nile to the tranquil desert dunes of the Sahara, the spirit of Egypt remains boundless.
+        </p>
+        <div class="ancient-facts-strip">
+          <div class="fact-card">
+            <span class="fact-icon">𓋹</span>
+            <h4>Ankh • Life</h4>
+            <p>Symbol of divine eternal vitality carried by pharaohs and gods.</p>
+          </div>
+          <div class="fact-card">
+            <span class="fact-icon">𓅃</span>
+            <h4>Horus • Sky</h4>
+            <p>The solar falcon whose right eye was the sun and left eye the moon.</p>
+          </div>
+          <div class="fact-card">
+            <span class="fact-icon">𓆣</span>
+            <h4>Khepri • Rebirth</h4>
+            <p>The sacred scarab beetle rolling the dawn sun across the firmament.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==============================================
+         SCENE 08: THE ETERNAL LEGACY
+         ============================================== -->
+    <section class="story-scene" id="scene-08" data-scene="7" data-frame-start="561" data-frame-end="600">
+      <div class="scene-content scene-finale">
+        <div class="scene-badge">
+          <span class="badge-line"></span>
+          <span class="badge-text">SCENE 08 • THE CLIMAX</span>
+          <span class="badge-line"></span>
+        </div>
+        <h2 class="scene-title monumental finale-glow">SOME WONDERS ARE NEVER FORGOTTEN.</h2>
+        <p class="scene-lead">
+          Explore Egypt. Discover humanity’s past. See the world differently.
+        </p>
+
+        <!-- Interactive Journey Actions -->
+        <div class="finale-action-bar">
+          <button id="btn-restart-journey" class="btn-royal">
+            <span class="btn-border-corner tl"></span>
+            <span class="btn-border-corner tr"></span>
+            <span class="btn-border-corner bl"></span>
+            <span class="btn-border-corner br"></span>
+            <span class="btn-text">REVISIT FROM THE DAWN ↑</span>
+          </button>
+          <button id="btn-view-construction-finale" class="btn-ghost">
+            ▶ Play Khufu Construction Video
+          </button>
+        </div>
+
+        <!-- Grand Footer -->
+        <footer class="experience-footer">
+          <div class="footer-divider-hieroglyph" aria-hidden="true">
+            𓊹 𓈖 𓏏 𓊹 𓈖 𓏏 𓊹 𓈖 𓏏
+          </div>
+          <p class="footer-credit">
+            EGYPT: THE LAND OF ETERNAL WONDER &bull; CINEMATIC EXPLORATION EXPERIENCE
+          </p>
+          <p class="footer-subcredit">
+            Authentic frame sequences, video archival footage, and historical soundtrack recorded in homage to the legacy of ancient Kemet.
+          </p><br><br><br><br>
+                    <p class="footer-credit">
+                      DESIGNED &amp; DEVELOPED BY SALMAN
+                      </p>
+        </footer>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ==============================================
+       MODAL 1: HIGH-RES PHOTO LIGHTBOX
+       ============================================== -->
+  <div id="photo-modal" class="cinematic-modal" aria-hidden="true">
+    <div class="modal-backdrop" id="modal-backdrop-photo"></div>
+    <div class="modal-dialog photo-dialog">
+      <button class="modal-close-btn" id="btn-close-photo-modal" aria-label="Close Lightbox">✕</button>
+      <div class="modal-image-container">
+        <img id="modal-img-element" src="" alt="Ancient Egypt Archival Photograph">
+      </div>
+      <div class="modal-caption-bar">
+        <h3 id="modal-img-title" class="modal-caption-title"></h3>
+        <p id="modal-img-desc" class="modal-caption-desc"></p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==============================================
+       MODAL 2: PYRAMID CONSTRUCTION CINEMA PLAYER
+       ============================================== -->
+  <div id="video-modal" class="cinematic-modal" aria-hidden="true">
+    <div class="modal-backdrop" id="modal-backdrop-video"></div>
+    <div class="modal-dialog video-dialog">
+      <div class="modal-header">
+        <div class="modal-header-titles">
+          <span class="modal-kicker">ARCHIVAL CINEMATOGRAPHY</span>
+          <h3 class="modal-title">Building the Great Pyramid of Giza</h3>
+        </div>
+        <button class="modal-close-btn" id="btn-close-video-modal" aria-label="Close Video Player">✕</button>
+      </div>
+      <div class="modal-video-container">
+        <video id="construction-video-player" controls preload="metadata" playsinline>
+          <source src="assets/video/Building_the_Great_Pyramid_of_20261026164155.mp4" type="video/mp4">
+          Your browser does not support HTML5 video playback.
+        </video>
+      </div>
+      <div class="modal-video-info">
+        <p><strong>Footage Description:</strong> High-definition archaeological reconstruction demonstrating the transport of limestone blocks across the Nile harbor, ramp engineering, and the workforce community surrounding the Great Pyramid.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script type="module" src="js/app.js"></script>
+</body>
+</html>
